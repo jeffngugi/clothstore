@@ -125,6 +125,13 @@ class AuthController extends APIController
         return response()->json(['message' => 'Successfully logged out']);
     }
 
+    public function closed(){
+        $this->responseSuccess('Closed');
+    }
+
+    public function jeff(){
+        return $this->responseSuccess('Jeff');
+    }
     /**
      * Refresh a token.
      *

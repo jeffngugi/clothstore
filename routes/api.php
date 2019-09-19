@@ -14,3 +14,7 @@ Route::group([
     Route::post('me', 'AuthController@me');
     Route::get('verify', 'AuthController@emailVerify');
 });
+Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('jeff', 'AuthController@jeff');
+    Route::get('closed', 'AuthController@closed');
+});
