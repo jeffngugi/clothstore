@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\USer;
+use App\Models\USer;
 use Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

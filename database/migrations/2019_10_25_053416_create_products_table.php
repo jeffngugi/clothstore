@@ -17,17 +17,21 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->double('price',8,2);
-            $table->text('specification');
+            $table->text('specification')->nullable();
             $table->boolean('status');
             $table->string('color');
             $table->integer('quantity');
             $table->string('slug');
             $table->integer('discount');
-            $table->integer('user_id');
-            $table->integer('type_id');
-            $table->integer('category_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('category_id');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('type_id')->references('id')->on('types');
+            // $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

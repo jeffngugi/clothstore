@@ -18,3 +18,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('jeff', 'AuthController@jeff');
     Route::get('closed', 'AuthController@closed');
 });
+
+Route::apiResources([
+    'categories' => 'CategoryController',
+    // 'posts' => 'PostController'
+]);

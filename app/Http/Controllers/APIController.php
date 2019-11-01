@@ -13,11 +13,12 @@ abstract class APIController extends Controller
      * @param  string $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public function responseSuccess($message = 'Success.')
+    public function responseSuccess($message = 'Success.', $data )
     {
         return response()->json([
             'status' => 200,
             'message' => $message,
+            'data' => $data
         ], 200);
     }
 
