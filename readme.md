@@ -28,3 +28,15 @@ For easy setup, ensure you have composer, LEMP(or XAMP) are installed in your ma
 }
 </code>
 <br />
+Response
+<code>
+{
+    "status": 422,
+    "errors": {
+        "email": [
+            "The email has already been taken."
+        ]
+    }
+}
+
+</code>
