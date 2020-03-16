@@ -10,8 +10,10 @@ class CategoryController extends APIController
 {
     public function index(){
         $categories = Category::all();
+     
         if($categories->count() < 1){
-            return $this->responseSuccess('No any category. Kindly create new category');
+            
+            return $this->responseNotFound('No any category. Kindly create new category');
         }
         if($categories->count() > 0){
             return $this->responseSuccess('Categoriesfound', $categories);
