@@ -98,11 +98,11 @@ abstract class APIController extends Controller
      * @param  array $errors
      * @return \Illuminate\Http\JsonResponse
      */
-    public function responseNotFound($errors)
+    public function responseNotFound($error)
     {
         return response()->json([
             'status' => 404,
-            'errors' => $errors,
+            'error' => $error,
         ], 404);
     }
 

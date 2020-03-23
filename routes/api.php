@@ -21,6 +21,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
 Route::apiResources([
     'categories' => 'CategoryController',
-    'types'=>'TypeController'
+    'types'=>'TypeController',
+    'sub-categories'=>'SubCategoryController',
+    'roles'=>'RoleController'
     // 'posts' => 'PostController'
 ]);

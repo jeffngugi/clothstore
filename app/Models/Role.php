@@ -10,5 +10,8 @@ class Role extends Model
         'name', 'description'
     ];
 
+    protected $hidden = [
+        'deleted_at'
+    ];
    
 }
