@@ -14,15 +14,29 @@ Route::group([
     Route::post('me', 'AuthController@me');
     Route::get('verify', 'AuthController@emailVerify');
 });
-Route::group(['middleware' => ['jwt.verify']], function() {
-    Route::get('jeff', 'AuthController@jeff');
-    Route::get('closed', 'AuthController@closed');
-});
 
 Route::apiResources([
     'categories' => 'CategoryController',
     'types'=>'TypeController',
     'sub-categories'=>'SubCategoryController',
-    'roles'=>'RoleController'
+    'roles'=>'RoleController',
+    'coupon'=>'CouponController'
+
     // 'posts' => 'PostController'
 ]);
+
+
+//Middleware with login restrictions
+Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::get('jeff', 'AuthController@jeff');
+    Route::get('closed', 'AuthController@closed');
+
+    //Only admins will be able to access this routes
+    Route::group(['middleware'=>'checkadmin'], function(){
+       Route::apiResource('coupon', 'CouponController');
+        //Route::resource('properties', 'PropertyController');
+    });
+
+
+});
+

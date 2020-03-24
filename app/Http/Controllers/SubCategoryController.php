@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class SubCategoryController extends APIController
 {
     public function index(){
+
         try {
             $subcategories = SubCategory::all();
             if($subcategories->count() < 1){
@@ -44,11 +45,13 @@ class SubCategoryController extends APIController
     }
 
     public function show($id){
+
         try {
             $subcategory = SubCategory::find($id);
             if(!$subcategory){
                 return $this->responseNotFound('Subcategory not found');
             }else{
+                return $subcategory->subcategoris;
                 return $this->responseSuccess('Succesful',$subcategory);
             }
         } catch (Exception $e) {

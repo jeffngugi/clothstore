@@ -9,7 +9,11 @@ class Coupon extends Model
 {
     use SoftDeletes;
     
+    protected $hidden = [
+        'deleted_at'
+    ];
+
     protected $fillable =[
-        'name', 'percent_discount','type','code','percent','value'
+        'type', 'code','value' 
     ];
 }
