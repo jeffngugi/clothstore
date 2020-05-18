@@ -20,7 +20,7 @@ Route::apiResources([
     'types'=>'TypeController',
     'sub-categories'=>'SubCategoryController',
     'roles'=>'RoleController',
-    'coupon'=>'CouponController'
+    'coupons'=>'CouponController',
 
     // 'posts' => 'PostController'
 ]);
@@ -33,7 +33,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     //Only admins will be able to access this routes
     Route::group(['middleware'=>'checkadmin'], function(){
-       Route::apiResource('coupon', 'CouponController');
+       Route::apiResource('coupon', 'CouponController')->except('show');
+       Route::apiResource('products', 'ProductController');
         //Route::resource('properties', 'PropertyController');
     });
 

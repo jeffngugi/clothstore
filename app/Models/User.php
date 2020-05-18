@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,5 +60,19 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    /**
+     * Return the logged in user
+     */
+    protected static function getLogged(){
+        if(Auth::guard()->user()){
+        return response()->json(Auth::guard()->user()->only(['id','name', 'email']));
+        }else{
+            return response()->json([
+                'status' => 401,
+                'errors' => 'UnAuthorised, loggin first',
+            ], 401);
+        }
     }
 }

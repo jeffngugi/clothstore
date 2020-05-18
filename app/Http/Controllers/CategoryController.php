@@ -9,14 +9,16 @@ use App\Http\Requests\CategoryRequest;
 class CategoryController extends APIController
 {
     public function index(){
-        $categories = Category::all();
+
+        $categories = Category::with('subcategories')->get();
+        // $categories = Category::all();
      
         if($categories->count() < 1){
             
             return $this->responseNotFound('No any category. Kindly create new category');
         }
         if($categories->count() > 0){
-            return $this->responseSuccess('Categoriesfound', $categories);
+            return $this->responseSuccess('Categories found', $categories);
         }
 
 
@@ -42,7 +44,8 @@ class CategoryController extends APIController
 
     public function show($id){
         try {
-            $category = Category::find($id);
+            // $category = Category::find($id);
+            $category = Category::with('subcategories')->find($id);
         if(!$category){
             return $this->responseNotFound('Category not found');
         }else{

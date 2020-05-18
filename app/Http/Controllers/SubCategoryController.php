@@ -45,14 +45,12 @@ class SubCategoryController extends APIController
     }
 
     public function show($id){
-
         try {
             $subcategory = SubCategory::find($id);
             if(!$subcategory){
                 return $this->responseNotFound('Subcategory not found');
             }else{
-                return $subcategory->subcategoris;
-                return $this->responseSuccess('Succesful',$subcategory);
+                return $this->responseSuccess('Successful',$subcategory);
             }
         } catch (Exception $e) {
             return Response::json([  'errors'=> [ ['message' => $e->getMessage()] ] ]);

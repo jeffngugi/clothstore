@@ -106,11 +106,12 @@ class AuthController extends APIController
      */
     public function me()
     {
-        if($this->guard()->user()){
-        return response()->json($this->guard()->user()->only(['id','name', 'email']));
-        }else{
-            return $this->responseUnauthorized();
-        }
+        return User::getLogged();
+        // if($this->guard()->user()){
+        // return response()->json($this->guard()->user()->only(['id','name', 'email']));
+        // }else{
+        //     return $this->responseUnauthorized();
+        // }
     }
 
     /**

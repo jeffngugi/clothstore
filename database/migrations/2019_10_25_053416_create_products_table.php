@@ -18,14 +18,15 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->double('price',8,2);
             $table->text('specification')->nullable();
-            $table->boolean('status');
+            $table->boolean('status')->default(true);
             $table->string('color');
             $table->integer('quantity');
             $table->string('slug');
-            $table->integer('discount');
+            $table->integer('discount')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('type_id');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('subcategory_id');            
             $table->softDeletes();
             $table->timestamps();
 
