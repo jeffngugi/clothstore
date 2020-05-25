@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\APIController;
 use App\Http\Requests\CategoryRequest;
 
@@ -25,14 +26,18 @@ class CategoryController extends APIController
     }
 
 
-    public function store(CategoryRequest $request){
-
+    public function store(Request $request){
         try {
-            $input= $request->all();
-            $category =Category::create($input);
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255|unique:categories',
+            ]);
+            if($validator->fails()){
+                return $this->responseUnprocessable($validator->errors());
+            }
+            $input = $request->all();
+            $category = Category::create($input);
             if($category){
-                $categories = Category::all();
-                return $this->responseSuccess('Category successfully created',null);
+                return $this->responseResourceCreated();
             }
         } catch (Exception $e) {
             return Response::json([  'errors'=> [ ['message' => $e->getMessage()] ] ]);
@@ -84,7 +89,7 @@ class CategoryController extends APIController
                 return $this->responseNotFound('Category not found');
             } 
             $category->delete();
-            return $this->responseResourceDeleted();
+            return $this->responseResourceDeleted('category succesfully deleted');
         } catch (Exception $e) {
             return Response::json([  'errors'=> [ ['message' => $e->getMessage()] ] ]);
         }

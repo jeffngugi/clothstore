@@ -59,9 +59,9 @@ abstract class APIController extends Controller
     public function responseResourceDeleted($message = 'Resource deleted.')
     {
         return response()->json([
-            'status' => 204,
+            'status' => 200,
             'message' => $message,
-        ], 204);
+        ], 200);
     }
 
     /**

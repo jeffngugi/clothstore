@@ -4,14 +4,32 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Product extends Model
 {
     use SoftDeletes;
+    use Sluggable;
+
+
     
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
+
+
+
     protected $fillable = [
         'name','description', 'price', 'specification','status','color','quantity', 'slug', 'discount','user_id', 'type_id','category_id','subcategory_id'
     ];
+
+    
 
     public function category(){
         return $this->belongsTo('App\Models\Category');

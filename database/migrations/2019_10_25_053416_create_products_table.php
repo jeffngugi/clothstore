@@ -22,7 +22,6 @@ class CreateProductsTable extends Migration
             $table->string('color');
             $table->integer('quantity');
             $table->string('slug');
-            $table->integer('discount')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('type_id');
             $table->unsignedBigInteger('category_id');
