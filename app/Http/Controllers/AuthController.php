@@ -106,6 +106,8 @@ class AuthController extends APIController
      */
     public function me()
     {
+        // $user = response()->json(auth()->user());
+        // return $user->id;
         return User::getLogged();
         // if($this->guard()->user()){
         // return response()->json($this->guard()->user()->only(['id','name', 'email']));

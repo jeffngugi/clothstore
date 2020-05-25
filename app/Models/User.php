@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Response;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -65,9 +66,11 @@ class User extends Authenticatable implements JWTSubject
     /**
      * Return the logged in user
      */
-    protected static function getLogged(){
+    static function getLogged(){
         if(Auth::guard()->user()){
-        return response()->json(Auth::guard()->user()->only(['id','name', 'email']));
+        $user =Auth::guard()->user()->only(['id','name', 'email']);
+            
+        return $user;
         }else{
             return response()->json([
                 'status' => 401,

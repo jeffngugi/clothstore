@@ -28,9 +28,8 @@ class ProductController extends APIController
 
     public function store(Request $request){
         $user = User::getLogged();
-        // var_dump($user);
-        // $user_id = $user->id;    
-        // return $user;
+        $user_id = $user['id'];    
+        // return $user_id;
         
         try {
             $validator = Validator::make($request->all(), [
@@ -46,9 +45,7 @@ class ProductController extends APIController
             if($validator->fails()){
                 return $this->responseUnprocessable($validator->errors());
             }
-            
-                // to do get slug
-                $product = array_merge($request->all(), ['user_id'=>'1', 'status'=>true]);
+                $product = array_merge($request->all(), ['user_id'=>$user_id, 'status'=>true]);
                 // return $this->responseSuccess('dsdsd', $product);
                 // $input = $request->all();
                 $save = Product::create($product);
