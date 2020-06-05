@@ -12,6 +12,18 @@ class Image extends Model
         'name', 'product_id'
     ];
 
+    protected $hidden = [
+        'deleted_at'
+    ];
+
+    protected $appends = [
+        'url'
+    ];
+
+    public function getUrlAttribute(){
+        return asset('/storage/cloths/' . $this->name);
+    }
+
     public function product(){
         return  $this->belongsTo('App\Models\Product');
     }

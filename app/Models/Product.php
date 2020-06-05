@@ -55,5 +55,9 @@ class Product extends Model
         return $this->belongsTo('App\Models\Type');
     }
 
+    public function image(){
+        return $this->hasOne('App\Models\Image')->latest();
+    }
+
 
 }

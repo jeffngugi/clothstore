@@ -41,6 +41,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
        Route::apiResource('categories', 'CategoryController', ['only'=>['store', 'update', 'destroy']]);
        Route::apiResource('types', 'TypeController', ['only'=>['store', 'update', 'destroy']]);
        Route::apiResource('sub-categories', 'SubCategoryController', ['only'=>['store', 'update', 'destroy']]);
+       Route::post('products/upload', 'ProductController@upload');
         //Route::resource('properties', 'PropertyController');
     });
 
