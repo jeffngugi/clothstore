@@ -33,7 +33,9 @@ Route::get('products/type/{id}','ProductController@type');
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('jeff', 'AuthController@jeff');
     Route::get('closed', 'AuthController@closed');
-
+    Route::apiResource('wishlists', 'WishlistController');
+    Route::post('wishlists/{productId}', 'WishlistController@createWish')->name('wishlists.createWish');
+    Route::get('user/wishlists', 'WishlistController@userWishlist')->name('wishlists.userWishlist');
     //Only admins will be able to access this routes
     Route::group(['middleware'=>'checkadmin'], function(){
        Route::apiResource('coupon', 'CouponController')->except('show');
@@ -41,6 +43,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
        Route::apiResource('categories', 'CategoryController', ['only'=>['store', 'update', 'destroy']]);
        Route::apiResource('types', 'TypeController', ['only'=>['store', 'update', 'destroy']]);
        Route::apiResource('sub-categories', 'SubCategoryController', ['only'=>['store', 'update', 'destroy']]);
+       Route::apiResource('wishlists', 'WishlistController', ['only'=>['index']]);
        Route::post('products/upload', 'ProductController@upload');
         //Route::resource('properties', 'PropertyController');
     });

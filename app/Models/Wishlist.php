@@ -16,5 +16,20 @@ class Wishlist extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    
+    public function products(){
+        return $this->belongsTo('App\Models\Products');
+    }
+
+    protected $appends = [
+        'product'
+    ];
+    public function getProductAttribute(){
+        return Product::where('id', $this->product_id)->first();
+        // return $this->product_id;
+    }
+
+    public function getProductsAttribute(){
+        return Product::where('id', $this->product_id)->get();
+        // return $this->product_id;
+    }
 }

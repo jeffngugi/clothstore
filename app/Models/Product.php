@@ -59,5 +59,9 @@ class Product extends Model
         return $this->hasOne('App\Models\Image')->latest();
     }
 
+    public function wishlists(){
+        return $this->belongsToMany('App\Models\Wishlist', 'product_id');
+    }
+
 
 }
