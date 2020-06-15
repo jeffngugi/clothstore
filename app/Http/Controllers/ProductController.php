@@ -65,7 +65,7 @@ class ProductController extends APIController
         try {
             // $product = Product::find($id);
             $product = Product::with('images')->find($id);
-            if(!$product){
+            if($product->count() < 1){
                 return $this->responseNotFound('Product not found');
             }
             return $this->responseSuccess('success', $product);
@@ -80,7 +80,7 @@ class ProductController extends APIController
         try {
             // $product = Product::where('slug', $slug)->first();
             $product = Product::with('image')->where('slug', $slug)->get();
-            if(!$product){
+            if($product->count() < 1){
                 return $this->responseNotFound('Product not found');
             }
             return $this->responseSuccess('success', $product);

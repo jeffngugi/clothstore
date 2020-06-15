@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\APIController;
 use App\Models\Wishlist;
 use App\Models\Product;
-use App\Models\User; 
 
 
 use Illuminate\Http\Request;

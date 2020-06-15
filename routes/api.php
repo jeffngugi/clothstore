@@ -36,6 +36,10 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::apiResource('wishlists', 'WishlistController');
     Route::post('wishlists/{productId}', 'WishlistController@createWish')->name('wishlists.createWish');
     Route::get('user/wishlists', 'WishlistController@userWishlist')->name('wishlists.userWishlist');
+    Route::get('cart', 'CartController@mycart');
+    Route::post('cart', 'CartController@addToCart');
+    Route::delete('cart/{id}', 'CartController@removeFromCart');
+    Route::delete('cart', 'CartController@clearCart');
     //Only admins will be able to access this routes
     Route::group(['middleware'=>'checkadmin'], function(){
        Route::apiResource('coupon', 'CouponController')->except('show');
